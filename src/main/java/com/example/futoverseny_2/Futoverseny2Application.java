@@ -9,5 +9,4 @@ public class Futoverseny2Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Futoverseny2Application.class, args);
 	}
-
 }
