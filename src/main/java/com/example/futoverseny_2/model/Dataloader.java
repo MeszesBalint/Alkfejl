@@ -1,11 +1,11 @@
 package com.example.futoverseny_2.model;
 
+import com.example.futoverseny_2.repository.RaceRepository;
+import com.example.futoverseny_2.repository.ResultRepository;
+import com.example.futoverseny_2.repository.RunnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import com.example.futoverseny_2.repository.RunnerRepository;
-import com.example.futoverseny_2.repository.RaceRepository;
-import com.example.futoverseny_2.repository.ResultRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,29 +31,20 @@ public class Dataloader implements CommandLineRunner {
         Runner runner2 = new Runner("Jane Smith", 25, "female");
         Runner runner3 = new Runner("Bob Johnson", 40, "male");
         Runner runner4 = new Runner("Alice Brown", 35, "female");
-        List<Runner> runners = new ArrayList<>();
-        runners.add(runner1);
-        runners.add(runner2);
-        runners.add(runner3);
-        runners.add(runner4);
-        runnerRepository.saveAll(runners);
+        runnerRepository.saveAll(List.of(runner1, runner2, runner3, runner4));
 
         // Betöltjük a tesztadatokat a versenyekhez
-        Race race1 = new Race("Maraton", 42195); // Távolság méterben
-        Race race2 = new Race("Félmaraton", 21097);
-        Race race3 = new Race("Sprint", 400);
-        List<Runner> races = new ArrayList<>();
-        races.add(runner1);
-        runners.add(runner2);
-        runners.add(runner3);
-        runners.add(runner4);
+        List<Race> races = new ArrayList<>();
+        races.add(new Race("Maraton", 42195)); // Távolság méterben
+        races.add(new Race("Félmaraton", 21097));
+        races.add(new Race("Sprint", 400));
         raceRepository.saveAll(races);
 
         // Betöltjük a tesztadatokat az eredményekhez
-        Result result1 = new Result(runner1, race1, 180); // John Doe, Marathon, 180 perces időeredmény
-        Result result2 = new Result(runner2, race1, 200); // Jane Smith, Marathon, 200 perces időeredmény
-        Result result3 = new Result(runner3, race2, 90);  // Bob Johnson, Half Marathon, 90 perces időeredmény
-        Result result4 = new Result(runner4, race3, 1); // Alice Brown, Half Marathon, 100 perces időeredmény
+        Result result1 = new Result(runner1, races.get(0), 180); // John Doe, Marathon, 180 perces időeredmény
+        Result result2 = new Result(runner2, races.get(0), 200); // Jane Smith, Marathon, 200 perces időeredmény
+        Result result3 = new Result(runner3, races.get(1), 90);  // Bob Johnson, Half Marathon, 90 perces időeredmény
+        Result result4 = new Result(runner4, races.get(2), 100); // Alice Brown, Half Marathon, 100 perces időeredmény
         resultRepository.saveAll(List.of(result1, result2, result3, result4));
     }
 }
