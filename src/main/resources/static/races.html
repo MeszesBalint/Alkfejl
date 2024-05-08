@@ -1,12 +1,60 @@
 <!DOCTYPE html>
-<html lang="hu" xmlns:th="http://www.thymeleaf.org">
+<html lang="hu">
 <head>
     <meta charset="UTF-8">
     <title>Versenyek listája</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        #raceList {
+            margin-bottom: 20px;
+        }
+        #raceList div {
+            background-color: #fff;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-<h1>Versenyek listája</h1>
-<div id="raceList"></div>
+<div class="container">
+    <h1>Versenyek listája</h1>
+    <div id="raceList"></div>
+    <form action="/index.html">
+        <button type="submit">Vissza a kezdőlapra</button>
+    </form>
+</div>
 
 <script>
     async function fetchAndDisplayRaces() {
@@ -25,8 +73,5 @@
 
     fetchAndDisplayRaces();
 </script>
-<form action="/index.html">
-    <button type="submit">Vissza a kezdőlapra</button>
-</form>
 </body>
 </html>

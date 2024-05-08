@@ -3,17 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <title>Verseny részletek</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        #resultList {
+            margin-bottom: 20px;
+        }
+        #resultList div {
+            background-color: #fff;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-<h1>Verseny részletek</h1>
-<div id="resultList"></div>
+<div class="container">
+    <h1>Verseny részletek</h1>
+    <div id="resultList"></div>
+    <form action="/index.html">
+        <button type="submit">Vissza a kezdőlapra</button>
+    </form>
+</div>
 
 <script>
     async function fetchAndDisplayRaces() {
         const response = await fetch('/results/getAllResults');
         const results = await response.json();
 
-        // Objektum létrehozása csoportosításhoz
         const groupedResults = {};
 
         results.forEach(result => {
@@ -26,7 +73,6 @@
         const resultList = document.getElementById('resultList');
         resultList.innerHTML = '';
 
-        // Eredmények megjelenítése
         for (const raceName in groupedResults) {
             const raceResults = groupedResults[raceName];
             const raceElement = document.createElement('div');
@@ -44,8 +90,5 @@
 
     fetchAndDisplayRaces();
 </script>
-<form action="/index.html">
-    <button type="submit">Vissza a kezdőlapra</button>
-</form>
 </body>
 </html>
