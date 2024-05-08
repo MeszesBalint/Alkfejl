@@ -16,7 +16,7 @@ public class Race {
     private int distance;
 
     public Race() {
-        // Az alapértelmezett konstruktor hozzáadása
+
     }
 
     public Race(String name, int distance) {
@@ -24,7 +24,12 @@ public class Race {
         this.distance = distance;
     }
 
-    // getters and setters
 
+    public String getName() {
+        return name;
+    }
 
+    public int getDistance() {
+        return distance;
+    }
 }

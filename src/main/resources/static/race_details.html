@@ -1,27 +1,51 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="hu">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Verseny részletek</title>
 </head>
 <body>
-<h1>Verseny: <span th:text="${raceName}"></span></h1>
+<h1>Verseny részletek</h1>
+<div id="resultList"></div>
 
-<table>
-    <thead>
-    <tr>
-        <th>Név</th>
-        <th>Idő</th>
-    </tr>
-    </thead>
+<script>
+    async function fetchAndDisplayRaces() {
+        const response = await fetch('/results/getAllResults');
+        const results = await response.json();
 
-    <tbody>
-    <tr th:each="result : ${results}">
-        <td th:text="${result.runner.name}"></td>
-        <td th:text="${result.timeInMinutes}"></td>
-    </tr>
-    </tbody>
-</table>
+        // Objektum létrehozása csoportosításhoz
+        const groupedResults = {};
+
+        results.forEach(result => {
+            if (!groupedResults[result.race.name]) {
+                groupedResults[result.race.name] = [];
+            }
+            groupedResults[result.race.name].push(result);
+        });
+
+        const resultList = document.getElementById('resultList');
+        resultList.innerHTML = '';
+
+        // Eredmények megjelenítése
+        for (const raceName in groupedResults) {
+            const raceResults = groupedResults[raceName];
+            const raceElement = document.createElement('div');
+            raceElement.innerHTML = `<h2>${raceName}</h2>`;
+
+            raceResults.forEach(result => {
+                const resultElement = document.createElement('p');
+                resultElement.textContent = `${result.runner.name} ${result.runner.age} ${result.runner.gender} ${result.timeInMinutes} perc`;
+                raceElement.appendChild(resultElement);
+            });
+
+            resultList.appendChild(raceElement);
+        }
+    }
+
+    fetchAndDisplayRaces();
+</script>
+<form action="/index.html">
+    <button type="submit">Vissza a kezdőlapra</button>
+</form>
 </body>
 </html>

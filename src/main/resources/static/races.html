@@ -1,47 +1,32 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="hu" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Versenyek listája</title>
 </head>
 <body>
-<h1>Versenyek</h1>
+<h1>Versenyek listája</h1>
+<div id="raceList"></div>
 
-<table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Név</th>
-        <th>Távolság (km)</th>
-        <th>Megtekint</th>
-    </tr>
-    </thead>
+<script>
+    async function fetchAndDisplayRaces() {
+        const response = await fetch('/races/getAllRaces');
+        const races = await response.json();
 
-    <tbody>
-    <tr th:each="race: ${races}">
-        <td th:text="${race.id}"></td>
-        <td th:text="${race.name}"></td>
-        <td th:text="${race.distance}"></td>
-        <td><a th:href="@{/races/{id}(id=${race.id})}">Megtekint</a></td>
-    </tr>
-    </tbody>
-</table>
+        const raceList = document.getElementById('raceList');
+        raceList.innerHTML = '';
 
-<h2>Új verseny felvétele</h2>
-<form action="/addRace" method="post" >
-    <div>
-        <div>
-            <label for="nev">Új verseny neve:</label>
-            <input type="text" id="nev" name="name" placeholder="Új verseny neve" minlength="0">
-        </div>
+        races.forEach(race => {
+            const raceElement = document.createElement('div');
+            raceElement.textContent = `${race.name} (${race.distance}m)`;
+            raceList.appendChild(raceElement);
+        });
+    }
 
-        <div>
-            <label for="tavolsag">Távolság:</label>
-            <input type="number" id="tavolsag" name="distance" placeholder="0" min="0">
-        </div>
-    </div>
-    <button type="submit">Verseny létrehozása</button>
+    fetchAndDisplayRaces();
+</script>
+<form action="/index.html">
+    <button type="submit">Vissza a kezdőlapra</button>
 </form>
 </body>
 </html>

@@ -1,12 +1,9 @@
-// RunnerService.java
-
 package com.example.futoverseny_2.service;
 
 import com.example.futoverseny_2.model.Runner;
 import com.example.futoverseny_2.repository.RunnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service

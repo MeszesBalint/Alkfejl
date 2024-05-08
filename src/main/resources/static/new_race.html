@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Új verseny létrehozása</title>
+</head>
+<body>
+<h1>Új verseny létrehozása</h1>
+<form id="newRaceForm">
+    <label for="name">Verseny neve:</label>
+    <input type="text" id="name" name="name" required><br>
+    <label for="distance">Távolság (méterben):</label>
+    <input type="number" id="distance" name="distance" required><br>
+    <button type="button" onclick="createNewRace()">Létrehozás</button>
+</form>
+<div id="message"></div>
+<form action="/index.html">
+    <button type="submit">Vissza a kezdőlapra</button>
+</form>
+
+<script>
+    function createNewRace() {
+        const name = document.getElementById('name').value;
+        const distance = document.getElementById('distance').value;
+
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('distance', distance);
+
+        fetch('/races/addRace', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('message').innerText = 'Az új verseny sikeresen létrejött.';
+                    document.getElementById('newRaceForm').reset();
+                } else {
+                    document.getElementById('message').innerText = 'Hiba történt a verseny létrehozása során.';
+                }
+            })
+            .catch(error => {
+                console.error('Hiba történt a hálózati kérés során:', error);
+                document.getElementById('message').innerText = 'Hiba történt a hálózati kérés során.';
+            });
+    }
+</script>
+</body>
+</html>

@@ -1,5 +1,3 @@
-// RaceRepository.java
-
 package com.example.futoverseny_2.repository;
 
 import com.example.futoverseny_2.model.Race;

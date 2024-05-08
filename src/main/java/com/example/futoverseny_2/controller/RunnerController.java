@@ -1,7 +1,4 @@
-
-// RunnerController.java
-
-package com.example.futoverseny.controller;
+package com.example.futoverseny_2.controller;
 
 import com.example.futoverseny_2.model.Runner;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import com.example.futoverseny_2.service.RunnerService;
-
 import javax.validation.Valid;
 import java.util.List;
 

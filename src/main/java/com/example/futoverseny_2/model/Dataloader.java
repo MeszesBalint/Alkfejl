@@ -6,7 +6,6 @@ import com.example.futoverseny_2.repository.RunnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,25 +25,22 @@ public class Dataloader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        // Betöltjük a tesztadatokat a futókhoz
-        Runner runner1 = new Runner("John Doe", 30, "male");
-        Runner runner2 = new Runner("Jane Smith", 25, "female");
-        Runner runner3 = new Runner("Bob Johnson", 40, "male");
-        Runner runner4 = new Runner("Alice Brown", 35, "female");
+        Runner runner1 = new Runner("Ádám", 30, "férfi");
+        Runner runner2 = new Runner("Béla", 25, "férfi");
+        Runner runner3 = new Runner("Zsófi", 40, "nő");
+        Runner runner4 = new Runner("Emese", 35, "nő");
         runnerRepository.saveAll(List.of(runner1, runner2, runner3, runner4));
 
-        // Betöltjük a tesztadatokat a versenyekhez
         List<Race> races = new ArrayList<>();
-        races.add(new Race("Maraton", 42195)); // Távolság méterben
+        races.add(new Race("Maraton", 42195));
         races.add(new Race("Félmaraton", 21097));
         races.add(new Race("Sprint", 400));
         raceRepository.saveAll(races);
 
-        // Betöltjük a tesztadatokat az eredményekhez
-        Result result1 = new Result(runner1, races.get(0), 180); // John Doe, Marathon, 180 perces időeredmény
-        Result result2 = new Result(runner2, races.get(0), 200); // Jane Smith, Marathon, 200 perces időeredmény
-        Result result3 = new Result(runner3, races.get(1), 90);  // Bob Johnson, Half Marathon, 90 perces időeredmény
-        Result result4 = new Result(runner4, races.get(2), 100); // Alice Brown, Half Marathon, 100 perces időeredmény
+        Result result1 = new Result(runner1, races.get(0), 180);
+        Result result2 = new Result(runner2, races.get(0), 200);
+        Result result3 = new Result(runner3, races.get(1), 90);
+        Result result4 = new Result(runner4, races.get(2), 100);
         resultRepository.saveAll(List.of(result1, result2, result3, result4));
     }
 }
