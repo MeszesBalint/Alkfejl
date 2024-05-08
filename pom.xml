@@ -11,42 +11,36 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.6.3</version> <!-- Változtasd meg a Spring Boot verziót, ha szükséges -->
-		<relativePath/> <!-- lookup parent from repository -->
+		<version>2.5.4</version>
+		<relativePath/>
 	</parent>
 
 	<properties>
 		<java.version>1.8</java.version>
-			<java.version>9</java.version> <!-- vagy magasabb verzió -->
+		<java.version>9</java.version>
 
 
 	</properties>
 
 	<dependencies>
-		<!-- Validation API -->
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
-			<version>2.0.1.Final</version> <!-- Változtasd meg a verziót, ha szükséges -->
+			<version>2.0.1.Final</version>
 		</dependency>
-
-		<!-- Spring Boot Starter Web -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<!-- Spring Boot Starter Data JPA -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-		<!-- H2 Database -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		<!-- Spring Boot Starter Test (optional) -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -56,7 +50,6 @@
 
 	<build>
 		<plugins>
-			<!-- Spring Boot Maven Plugin -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>

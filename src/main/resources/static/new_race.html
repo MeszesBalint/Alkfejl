@@ -62,10 +62,20 @@
             margin-top: 20px;
         }
         .back-to-home {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
+            display: block;
+            width: fit-content;
+            margin: 0 auto;
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border-radius: 4px;
+            text-decoration: none;
         }
+
     </style>
 </head>
 <body>
@@ -76,16 +86,21 @@
         <input type="text" id="name" name="name" required><br>
         <label for="distance">Távolság (méterben):</label>
         <input type="number" id="distance" name="distance" required><br>
-        <button type="button" onclick="createNewRace()">Létrehozás</button>
+        <button type="button" onclick="checkAndCreateNewRace()">Létrehozás</button>
     </form>
     <div id="message"></div>
     <a href="/index.html" class="back-to-home">Vissza a kezdőlapra</a>
 </div>
 
 <script>
-    function createNewRace() {
+    function checkAndCreateNewRace() {
         const name = document.getElementById('name').value;
         const distance = document.getElementById('distance').value;
+
+        if (distance <= 0) {
+            document.getElementById('message').innerText = 'A távolság értéke legalább 1-nek kell lennie.';
+            return;
+        }
 
         const formData = new FormData();
         formData.append('name', name);
